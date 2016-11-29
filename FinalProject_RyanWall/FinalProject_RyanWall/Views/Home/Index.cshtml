@@ -1,0 +1,98 @@
+﻿
+<link href="@Url.Content("~/Content/RyansStyleSheet.css")" rel="stylesheet" type="text/css" />
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="homejumbo" class="jumbotron">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 id="h1hp">Ryan's</h1>
+        </div>
+        <div class="col-md-6">
+            <h1 id="h2hp">Project</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="col1" class="col-md-6">
+            <p id="GetStatsP" class="lead"> Go To About</p>
+            <Button id="statsbtn" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("About", "Home")'"> Get STATS &raquo;</Button>
+        </div>
+
+        <div id="col2" class="col-md-6">
+            <p id="GetStatsP2" class="lead"> Go To Contacts</p>
+            <Button id="statsbtn2" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("Contact", "Home")'"> Get Contacts &raquo;</Button>
+        </div>
+    </div>
+
+</div>
+
+<div id="linkjumbo" class="jumbotron">
+<div class="row">
+    <div class="col-md-4">
+        <h2 id="h2linksection">NBA.COM</h2>
+        <p id="plinksection">
+            Follow this link to go to NBA.com and get updates on games and much more.
+        </p>
+        <p><a class="btn btn-success btn-lg" href="http://www.nba.com/">NBA &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2 id="h2linksection">ESPN.COM</h2>
+        <p id="plinksection">Follow this link to go to espn.com and get updates on games and much more.</p>
+        <p><a class="btn btn-success btn-lg" href="http://www.espn.com/nba/">ESPN &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2 id="h2linksection">BLAZERS EDGE</h2>
+        <p id="plinksection">Follow this link and go to blazersedge.com and you will get more information about the blazers </p>
+        <p><a class="btn btn-success btn-lg" href="http://www.blazersedge.com/">Blazers Edge &raquo;</a></p>
+     </div>
+</div>
+</div>
+
+<div id="progressjumbo" class="jumbotron">
+
+
+    <div class="container">
+        <h2 id="progressh2">Blazers Wins Progress Bar</h2>
+        <p></p>
+        <div id="blazersprogress" class="progress">
+            <div id="blazersbar" class="progress-bar progress-bar-danger progress-bar-striped active"  role="progressbar"
+              aria-valuemin="0" aria-valuemax="82" style="width:7%"> 7 Wins
+              
+               
+            </div>
+        </div>
+    </div>
+
+    <button id="progressbtn" data-toggle="btntooltip" data-placement="right" title="Click to add another win for the blazers" class="btn btn-success btn-lg glyphicon glyphicon-plus-sign" > ClickMe </button> 
+
+
+</div>
+
+@section scripts {
+    <script>
+     
+        $('#progressbtn').click(function () {
+            alert("Another Blazers Win");
+           var elem = document.getElementById("blazersbar");
+            var width = elem.style.width;
+            //alert(parseInt(width) + 1);
+            var newwidth = parseInt(width) + 1;
+           elem.style.width = newwidth + '%';
+            //alert(elem.style.width);
+            document.getElementById("blazersbar").innerHTML = newwidth * 1 + 'Wins';
+        })
+
+        $(document).ready(function () {
+            $('[data-toggle="btntooltip"]').tooltip();
+        });
+        
+    </script>
+}
+  

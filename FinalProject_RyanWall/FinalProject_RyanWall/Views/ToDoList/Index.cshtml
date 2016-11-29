@@ -1,0 +1,195 @@
+﻿@model IList<FinalProject_RyanWall.Models.ToDoList>
+<link href="@Url.Content("~/Content/RyansStyleSheet.css")" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div id="homejumbo" class="jumbotron">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 id="h1hp">Ryan's</h1>
+        </div>
+        <div class="col-md-6">
+            <h1 id="h2hp">Project</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="col1" class="col-md-6">
+            <p id="GetStatsP" class="lead"> Go To About Page</p>
+            <Button id="todoindexbtn" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("About", "Home")'"> About Page &raquo;</Button>
+        </div>
+
+        <div id="col2" class="col-md-6">
+            <p id="GetStatsP2" class="lead"> Go To Contacts Page</p>
+            <Button id="todoindexbtn" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("Contact", "Home")'"> Contacts Page &raquo;</Button>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+<div id="todojumbo" class="jumbotron">
+    <div class="well"><h2 class="text-center" id="tabletitle" style="padding: 40px; background-color: orangered; color: white;">To-Do List</h2></div>
+
+    <p>
+        @*@Html.ActionLink("Add Item", "Create", null, htmlAttributes: new { @class = "btn btn-primary btn-lg" })*@
+
+        <!-- Button trigger modal -->
+        <button id="add-list-item" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#insert-List-Item-Modal">
+            Add Item
+        </button>
+        <button id="toggle-edit" type="button" class="btn btn-primary btn-lg">Edit</button>
+    </p>
+    <div class="container">
+        <div class="table-wrapper">
+            <table id="todotable" class="table table-striped">
+                <tr>
+                    <th id="todohead">
+                        ID
+                    </th>
+
+                    <th id="todohead">
+                        @Html.DisplayNameFor(m => m[1].NameOfDuty)
+                    </th>
+                    <th id="todohead">
+                        @Html.DisplayNameFor(m => m[2].Date)
+                    </th>
+                    <th id="todohead">
+                        @Html.DisplayNameFor(m => m[3].DateToFinish)
+                    </th>
+                    <th id="todohead">
+                        @Html.DisplayNameFor(m => m[4].IsChecked)
+                    </th>
+
+                    <th id="todohead" class="hidden edit-actions">
+                        Edit
+                    </th>
+
+                    <th id="todohead" class="hidden edit-actions">
+                       Delete
+                    </th>
+                </tr>
+
+                @for (var i = 0; i < Model.Count(); ++i)
+            {
+                    @*@foreach (var item in Model) {*@
+                    @*<tr class="rows"  style="text-decoration: @(Model.ElementAt(i).IsChecked ? "line-through" : " ")">*@
+
+                    <tr>
+                        <td id="tdtodo" class="rows" style="text-decoration: @(Model.ElementAt(i).IsChecked ? "line-through" : " ")">
+                            @Html.DisplayFor(m => m[i].ToDoListId)
+                        </td>
+
+                        <td id="tdtodo" class="rows" style="text-decoration: @(Model.ElementAt(i).IsChecked ? "line-through" : " ")">
+                            @Html.DisplayFor(m => m[i].NameOfDuty)
+                        </td>
+                        <td id="tdtodo" class="rows" style="text-decoration: @(Model.ElementAt(i).IsChecked ? "line-through" : " ")">
+                            @Html.DisplayFor(m => m[i].Date)
+                        </td>
+                        <td id="tdtodo" class="rows" style="text-decoration: @(Model.ElementAt(i).IsChecked ? "line-through" : " ")">
+                            @Html.DisplayFor(m => m[i].DateToFinish)
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(m => m[i].IsChecked)
+                           
+                        </td>
+                        <td  class="hidden edit-actions">
+                            <button type="button" class="edit-list-item btn btn-xs btn-success" data-toggle="modal" data-target="#insert-List-Item-Modal">
+                                <span class="glyphicon glyphicon-pencil"> </span>
+                                @*<div class="hidden entitykey">   </div>*@
+                                <div class="hidden id"> @Html.DisplayFor(m => m[i].ToDoListId)  </div>
+                                <div class="hidden name"> @Html.DisplayFor(m => m[i].NameOfDuty)  </div>
+                                <div class="hidden date"> @Html.DisplayFor(m => m[i].Date)  </div>
+                                <div class="hidden datetofinish"> @Html.DisplayFor(m => m[i].DateToFinish)  </div>
+                                @*<div class="hidden ischecked"> @Model.ElementAt(i).IsChecked </div>*@
+                                <div class="hidden ischecked"> @Model.ElementAt(i).IsChecked </div>
+                            </button>
+                        </td>
+
+
+                        <td class="hidden edit-actions">
+                            @*@Html.ActionLink("Edit", "Edit", new { id=Model.ElementAt(i).ToDoListId }, htmlAttributes: new { @class = "btn btn-default btn-small" })
+                                 @Html.ActionLink("Details", "Details", new { id = Model.ElementAt(i).ToDoListId }, htmlAttributes: new { @class = "btn btn-default btn-small" })
+                             @Html.ActionLink("Delete", "Delete", new { id = Model.ElementAt(i).ToDoListId }, htmlAttributes: new { @class = "btn btn-default btn-small" })
+                            <td>*@
+                            <button id="btnchecked" type="button" class="btn btn-xs btn-danger" onclick="location.href='@Url.Action("Delete", "ToDoList", new { id = Model.ElementAt(i).ToDoListId })'">
+                                <span class="glyphicon glyphicon-remove"> </span>
+                            </button>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+</div>
+</div>
+
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="insert-List-Item-Modal" tabindex="-1" role="dialog" aria-labelledby="Add List Item">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add a List Item</h4>
+            </div>
+            <form id="formid" action="~/ToDoList/Create" name="formname" method="post" class="form-horizontal formclass" role="form">
+             
+                @*<input type="text" name="entity_key"  class="hidden"/>*@
+                <input type="text" name="ToDoListId" class="hidden" />
+                   <div class="modal-body">
+
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label for="Add-Item-Input" class="col-sm-2 control-label">Name Of Task</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="Add-Item-Input" placeholder="Name Of Task" name="NameOfDuty">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Date-Input" class="col-sm-2 control-label">Date</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="Date-Input" placeholder="Date" name="Date">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="DateToFinish-Input" class="col-sm-2 control-label">Date To Finish</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="DateToFinish-Input" placeholder="Date To Finish" name="DateToFinish">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="IsChecked-Input" class="col-sm-2 control-label">Have You Finished</label>
+                        <div class="checkbox">
+                            <input type="checkbox" class="form-control" id="IsChecked-Input" placeholder="Have You Finished" name="IsChecked" >
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Item</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/ToDoList.js">
+
+</script>

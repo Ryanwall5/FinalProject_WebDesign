@@ -1,0 +1,93 @@
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+  
+    <link href="@Url.Content("~/Content/RyansStyleSheet.css")" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryui")
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+   
+ 
+    @*<script>
+        $(function () {
+            $("#dialog-modal").dialog({
+                autoOpen: false,
+                width: 500,
+                height: 500,
+                show: {
+                    effect: "blind",
+                    duration: 1000
+                },
+                hide: {
+                    effect: "explode",
+                    duration: 1000
+                }
+            });
+
+            $("#modal-opener").click(function () {
+
+                $("#dialog-modal").dialog("open");
+
+            });
+        });
+        function onSuccess() {
+            $("dialog-modal").dialog("close");
+        }
+
+    </script>*@
+
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Html.ActionLink("NBA Stats", "Index", "Home", new { area = "" }, new { @class = "navbar-brand " })*@
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "ToDoList")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                    @if (Request.IsAuthenticated)
+                    {
+                    <li>@Html.ActionLink("Add Item", "Create", "ToDoList")</li>
+                    <li>@Html.ActionLink("View To-Do List", "Index", "ToDoList")</li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+            @RenderBody()
+            
+          
+            <hr />
+            <footer>
+                <p id="bottomtag">&copy; @DateTime.Now.Year - Ryans ASP.NET Application</p>
+            </footer>
+    </div>
+
+    @RenderSection("scripts", required: false)
+
+   
+</body>
+</html>
