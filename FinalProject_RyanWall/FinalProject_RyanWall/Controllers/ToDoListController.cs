@@ -74,6 +74,7 @@ namespace FinalProject_RyanWall.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ToDoListId,NameOfDuty,Date,DateToFinish,IsChecked")] ToDoList toDoList)
         {
+            bool.Parse(toDoList.IsChecked.ToString());
             if (ModelState.IsValid)
             {
                 db.ToDoLists.Add(toDoList);

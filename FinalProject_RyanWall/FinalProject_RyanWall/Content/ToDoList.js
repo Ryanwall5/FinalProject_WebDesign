@@ -41,7 +41,24 @@ rh.list.enablebuttons = function () {
         // $("#insert-List-Item-Modal input[name=NameOfDuty]").val("");
         // $("#insert-List-Item-Modal input[name=Date]").val("");
         // $("#insert-List-Item-Modal input[name=DateToFinish]").val("");
-        // //$("#insert-List-Item-Modal input[name=IsChecked]").val("");
+        $("#IsChecked-Input").click(function () { 
+            console.log("clicked on checkbox");
+            //$("#edit-Item-Modal input[name=IsChecked]").val(Boolean(check));
+            addcheck = this.checked;
+           
+            if (addcheck == true) {
+
+                console.log("inside true");
+            }
+            else {
+
+                console.log("inside false");
+            }
+
+            $("#insert-List-Item-Modal input[name=IsChecked").val(Boolean(addcheck));
+
+        });
+      
         // $("#insert-List-Item-Modal input[name=ToDoListId]").val("").prop("disabled", true);
        
     });
@@ -64,6 +81,7 @@ rh.list.enablebuttons = function () {
         
         if (check == true ) {
       
+             
             console.log("inside true");
         }
         else {
