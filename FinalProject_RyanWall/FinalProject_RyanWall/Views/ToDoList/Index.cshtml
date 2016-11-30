@@ -105,15 +105,15 @@
                            
                         </td>
                         <td  class="hidden edit-actions">
-                            <button type="button" class="edit-list-item btn btn-xs btn-success" data-toggle="modal" data-target="#insert-List-Item-Modal">
+                            <button type="button" class="edit-list-item btn btn-xs btn-success" data-toggle="modal" data-target="#edit-Item-Modal">
                                 <span class="glyphicon glyphicon-pencil"> </span>
                                 @*<div class="hidden entitykey">   </div>*@
                                 <div class="hidden id"> @Html.DisplayFor(m => m[i].ToDoListId)  </div>
                                 <div class="hidden name"> @Html.DisplayFor(m => m[i].NameOfDuty)  </div>
                                 <div class="hidden date"> @Html.DisplayFor(m => m[i].Date)  </div>
                                 <div class="hidden datetofinish"> @Html.DisplayFor(m => m[i].DateToFinish)  </div>
-                                @*<div class="hidden ischecked"> @Model.ElementAt(i).IsChecked </div>*@
-                                <div class="hidden ischecked"> @Model.ElementAt(i).IsChecked </div>
+                                <div class="hidden ischecked">  @Model.ElementAt(i).IsChecked </div>
+                                @*<div class="hidden ischecked"> @Html.DisplayFor(m => m[i].IsChecked) </div>*@
                             </button>
                         </td>
 
@@ -137,18 +137,17 @@
 
 <!-- Button trigger modal -->
 
-<!-- Modal -->
+@* This is for the Add item Modal *@
 <div class="modal fade" id="insert-List-Item-Modal" tabindex="-1" role="dialog" aria-labelledby="Add List Item">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header jumbotron">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Add a List Item</h4>
+                <h4 class="modal-title" id="myModalLabel">Add List Item</h4>
             </div>
             <form id="formid" action="~/ToDoList/Create" name="formname" method="post" class="form-horizontal formclass" role="form">
              
-                @*<input type="text" name="entity_key"  class="hidden"/>*@
-                <input type="text" name="ToDoListId" class="hidden" />
+                @*<input type="text" name="ToDoListId" class="hidden" />*@
                    <div class="modal-body">
 
                     @Html.AntiForgeryToken()
@@ -182,7 +181,61 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Add Item</button>
+                    <button type="submit"  class="btn btn-primary">Add Item</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+@* This is for the Edit modal *@
+<div class="modal fade" id="edit-Item-Modal" tabindex="-1" role="dialog" aria-labelledby="Edit List Item">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header jumbotron">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Edit List Item</h4>
+            </div>
+            <form id="formid" action="~/ToDoList/Edit" name="formname" method="post" class="form-horizontal formclass" role="form">
+
+                @*<input type="text" name="entity_key"  class="hidden"/>*@
+                <input type="text" name="ToDoListId" class="hidden" />
+                <div class="modal-body">
+
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label for="edit-Item-Input" class="col-sm-2 control-label">Name Of Task</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="edit-Item-Input" placeholder="Name Of Task" name="NameOfDuty">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Edit-Date-Input" class="col-sm-2 control-label">Date</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="Edit-Date-Input" placeholder="Date" name="Date">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Edit-DateToFinish-Input" class="col-sm-2 control-label">Date To Finish</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="Edit-DateToFinish-Input" placeholder="Date To Finish" name="DateToFinish">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Edit-IsChecked-Input" class="col-sm-2 control-label">Have You Finished</label>
+                        <div class="checkbox">
+                            <input type="checkbox" class="form-control" id="Edit-IsChecked-Input" placeholder="Have You Finished" name="IsChecked">
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" value="Save" class="btn btn-primary">Edit Item</button>
                 </div>
             </form>
 

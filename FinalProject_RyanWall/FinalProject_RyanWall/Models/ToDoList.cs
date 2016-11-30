@@ -14,7 +14,7 @@ namespace FinalProject_RyanWall.Models
 
         [Required(ErrorMessage = "Name is Requried")]
         [Display(Name = "Name of Duty")]
-        [StringLength(128, ErrorMessage = "Description is limited to 32 characters")]
+        [StringLength(128, ErrorMessage = "Name is limited to 32 characters")]
         public string NameOfDuty { get; set; }
 
         [Required(ErrorMessage = "Date is Requried")]
@@ -38,13 +38,5 @@ namespace FinalProject_RyanWall.Models
 
 
     }
-
-    //public class EditListViewModel
-    //{
-    //    public int ToDoListId { get; set; }
-    //    public string NameOfDuty { get; set; }
-    //    public string Date { get; set; }// this is only used to retrieve record from Db
-    //    public string DateToFinish { get; set; }
-    //    public bool IsChecked { get; set; }
-    //}
+    
 }
